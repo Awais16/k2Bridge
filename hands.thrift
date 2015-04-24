@@ -3,6 +3,9 @@
 #Awais (creative technologies FH)
 
 
+namespace java k2Bridge
+namespace csharp k2Bridge
+
 enum HandState {
 	CLOSED=0,
 	OPEN=1,

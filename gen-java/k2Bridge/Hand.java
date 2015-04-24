@@ -4,6 +4,8 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
  *  @generated
  */
+package k2Bridge;
+
 import org.apache.thrift.scheme.IScheme;
 import org.apache.thrift.scheme.SchemeFactory;
 import org.apache.thrift.scheme.StandardScheme;
@@ -618,7 +620,7 @@ public class Hand implements org.apache.thrift.TBase<Hand, Hand._Fields>, java.i
             break;
           case 3: // HAND_STATE
             if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
-              struct.handState = HandState.findByValue(iprot.readI32());
+              struct.handState = k2Bridge.HandState.findByValue(iprot.readI32());
               struct.setHandStateIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
@@ -626,7 +628,7 @@ public class Hand implements org.apache.thrift.TBase<Hand, Hand._Fields>, java.i
             break;
           case 4: // TRACKING_STATE
             if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
-              struct.trackingState = TrackingState.findByValue(iprot.readI32());
+              struct.trackingState = k2Bridge.TrackingState.findByValue(iprot.readI32());
               struct.setTrackingStateIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
@@ -721,11 +723,11 @@ public class Hand implements org.apache.thrift.TBase<Hand, Hand._Fields>, java.i
         struct.setYIsSet(true);
       }
       if (incoming.get(2)) {
-        struct.handState = HandState.findByValue(iprot.readI32());
+        struct.handState = k2Bridge.HandState.findByValue(iprot.readI32());
         struct.setHandStateIsSet(true);
       }
       if (incoming.get(3)) {
-        struct.trackingState = TrackingState.findByValue(iprot.readI32());
+        struct.trackingState = k2Bridge.TrackingState.findByValue(iprot.readI32());
         struct.setTrackingStateIsSet(true);
       }
     }

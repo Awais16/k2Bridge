@@ -5,8 +5,12 @@
  *  @generated
  */
 
-public enum TrackingState
+namespace k2Bridge
 {
-  Inferred = 0,
-  Tracked = 1,
+  public enum HandState
+  {
+    CLOSED = 0,
+    OPEN = 1,
+    LASSO = 2,
+  }
 }
