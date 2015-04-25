@@ -382,7 +382,7 @@ namespace Microsoft.Samples.Kinect.BodyBasics
                                     position.Z = InferredZPositionClamp;
                                 }
 
-                                DepthSpacePoint depthSpacePoint = this.coordinateMapper.MapCameraPointToDepthSpace(position);
+                                DepthSpacePoint depthSpacePoint = this.coordinateMapper.MapCameraPointToDepthSpace(position); //!important lookinto it so you know what you returning
                                 jointPoints[jointType] = new Point(depthSpacePoint.X, depthSpacePoint.Y);
                             }
 
@@ -553,7 +553,7 @@ namespace Microsoft.Samples.Kinect.BodyBasics
 
         private void setSendingHands(HandState handStateLeft, HandState handStateRight, Point leftHand, Point rightHand, TrackingState tsLeft, TrackingState tsRight)
         {
-            Console.WriteLine("setting Hand");
+            
             switch (handStateLeft)
             {
                 case HandState.Closed:
@@ -642,7 +642,6 @@ namespace Microsoft.Samples.Kinect.BodyBasics
         //implementing K2BridgeHandsService.Ifac
         public k2Bridge.Hands getHands()
         {
-            Console.WriteLine("called--");
             return this.hands;
         }
 
