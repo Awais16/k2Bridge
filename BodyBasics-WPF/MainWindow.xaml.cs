@@ -16,11 +16,16 @@ namespace Microsoft.Samples.Kinect.BodyBasics
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
     using Microsoft.Kinect;
+    using Thrift.Transport;
+    using Thrift.Server;
+    using System.Threading;
+    
+    
 
     /// <summary>
     /// Interaction logic for MainWindow
     /// </summary>
-    public partial class MainWindow : Window, INotifyPropertyChanged
+    public partial class MainWindow : Window, INotifyPropertyChanged, k2Bridge.HandService.Iface
     {
         /// <summary>
         /// Radius of drawn hand circles
@@ -126,14 +131,40 @@ namespace Microsoft.Samples.Kinect.BodyBasics
         /// Current status text to display
         /// </summary>
         private string statusText = null;
+        
+        private k2Bridge.Hands hands = null;
+
 
         /// <summary>
         /// Initializes a new instance of the MainWindow class.
         /// </summary>
         public MainWindow()
         {
+            //initialize hands to return for RPC call;
+            //to avoid conflict with sdk hands
+            hands = new k2Bridge.Hands();
+            hands.Left = new k2Bridge.Hand();
+            hands.Right = new k2Bridge.Hand();
+
+            //startHandsService();
+
+            RPCServer rpcServer= new RPCServer(this);
+            Thread oThread = new Thread(new ThreadStart(rpcServer.startHandsService));
+            oThread.Start();
+
+            // Spin for a while waiting for the started thread to become
+            // alive:
+            while (!oThread.IsAlive) ;
+
+
+
+
+
+
+
             // one sensor is currently supported
             this.kinectSensor = KinectSensor.GetDefault();
+            
 
             // get the coordinate mapper
             this.coordinateMapper = this.kinectSensor.CoordinateMapper;
@@ -358,6 +389,9 @@ namespace Microsoft.Samples.Kinect.BodyBasics
 
                             this.DrawHand(body.HandLeftState, jointPoints[JointType.HandLeft], dc);
                             this.DrawHand(body.HandRightState, jointPoints[JointType.HandRight], dc);
+
+                            setSendingHands(body.HandLeftState, body.HandRightState, jointPoints[JointType.HandLeft], jointPoints[JointType.HandRight], joints[JointType.HandLeft].TrackingState, joints[JointType.HandRight].TrackingState);
+
                         }
                     }
 
@@ -513,5 +547,96 @@ namespace Microsoft.Samples.Kinect.BodyBasics
             this.StatusText = this.kinectSensor.IsAvailable ? Properties.Resources.RunningStatusText
                                                             : Properties.Resources.SensorNotAvailableStatusText;
         }
+
+
+        private void setSendingHands(HandState handStateLeft, HandState handStateRight, Point leftHand, Point rightHand, TrackingState tsLeft, TrackingState tsRight)
+        {
+            switch (handStateLeft)
+            {
+                case HandState.Closed:
+                    hands.Left.HandState = k2Bridge.HandState.CLOSED;
+                    break;
+
+                case HandState.Open:
+                    hands.Left.HandState = k2Bridge.HandState.OPEN;
+                    break;
+
+                case HandState.Lasso:
+                    hands.Left.HandState = k2Bridge.HandState.LASSO;
+                    break;
+            }
+
+            switch (handStateRight)
+            {
+                case HandState.Closed:
+                    hands.Right.HandState = k2Bridge.HandState.CLOSED;
+                    break;
+
+                case HandState.Open:
+                    hands.Right.HandState = k2Bridge.HandState.OPEN;
+                    break;
+
+                case HandState.Lasso:
+                    hands.Right.HandState = k2Bridge.HandState.LASSO;
+                    break;
+            }
+            if (tsLeft == TrackingState.Tracked)
+            {
+                hands.Left.TrackingState = k2Bridge.TrackingState.Tracked;
+            }
+            else
+            {
+                hands.Left.TrackingState = k2Bridge.TrackingState.Inferred;
+            }
+            if (tsRight == TrackingState.Tracked)
+            {
+                hands.Right.TrackingState = k2Bridge.TrackingState.Tracked;
+            }
+            else
+            {
+                hands.Right.TrackingState = k2Bridge.TrackingState.Inferred;
+            }
+        }
+
+        public class RPCServer
+        {
+            k2Bridge.HandService.Iface hsh;
+            public RPCServer(k2Bridge.HandService.Iface hsh)
+            {
+                this.hsh = hsh;
+            }
+
+            public void startHandsService()
+            {
+                try
+                {
+                    ///HandServiceHandler handler = new HandServiceHandler(this.hands);
+                    k2Bridge.HandService.Processor processor = new k2Bridge.HandService.Processor(this.hsh);
+                    TServerTransport serverTransport = new TServerSocket(9090);
+                    //TServer server = new TSimpleServer(processor, serverTransport);
+
+                    // Use this for a multithreaded server
+                    TServer server = new TThreadPoolServer(processor, serverTransport);
+
+                    Console.WriteLine("Starting the server...");
+                    server.Serve();
+                }
+                catch (Exception x)
+                {
+                    Console.WriteLine(x.StackTrace);
+                }
+            }
+        }
+
+        //implementing K2BridgeHandsService.Ifac
+        public k2Bridge.Hands getHands()
+        {
+            return this.hands;
+        }
+
+
+    
+    
     }
+
 }

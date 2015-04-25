@@ -1,1 +1,16 @@
 F:\University\fh-kiel\hiwi\k2Bridge\BodyBasics-WPF\bin\AnyCPU\Debug\BodyBasics-WPF.exe.config
+F:\University\fh-kiel\hiwi\k2Bridge\BodyBasics-WPF\bin\AnyCPU\Debug\BodyBasics-WPF.exe
+F:\University\fh-kiel\hiwi\k2Bridge\BodyBasics-WPF\bin\AnyCPU\Debug\BodyBasics-WPF.pdb
+F:\University\fh-kiel\hiwi\k2Bridge\BodyBasics-WPF\bin\AnyCPU\Debug\Microsoft.Kinect.dll
+F:\University\fh-kiel\hiwi\k2Bridge\BodyBasics-WPF\bin\AnyCPU\Debug\Thrift.dll
+F:\University\fh-kiel\hiwi\k2Bridge\BodyBasics-WPF\bin\AnyCPU\Debug\Microsoft.Kinect.xml
+F:\University\fh-kiel\hiwi\k2Bridge\BodyBasics-WPF\obj\Debug\BodyBasics-WPF.csprojResolveAssemblyReference.cache
+F:\University\fh-kiel\hiwi\k2Bridge\BodyBasics-WPF\obj\Debug\MainWindow.baml
+F:\University\fh-kiel\hiwi\k2Bridge\BodyBasics-WPF\obj\Debug\MainWindow.g.cs
+F:\University\fh-kiel\hiwi\k2Bridge\BodyBasics-WPF\obj\Debug\App.g.cs
+F:\University\fh-kiel\hiwi\k2Bridge\BodyBasics-WPF\obj\Debug\BodyBasics-WPF_MarkupCompile.cache
+F:\University\fh-kiel\hiwi\k2Bridge\BodyBasics-WPF\obj\Debug\BodyBasics-WPF.g.resources
+F:\University\fh-kiel\hiwi\k2Bridge\BodyBasics-WPF\obj\Debug\Microsoft.Samples.Kinect.BodyBasics.Properties.Resources.resources
+F:\University\fh-kiel\hiwi\k2Bridge\BodyBasics-WPF\obj\Debug\BodyBasics-WPF.csproj.GenerateResource.Cache
+F:\University\fh-kiel\hiwi\k2Bridge\BodyBasics-WPF\obj\Debug\BodyBasics-WPF.exe
+F:\University\fh-kiel\hiwi\k2Bridge\BodyBasics-WPF\obj\Debug\BodyBasics-WPF.pdb
