@@ -132,7 +132,7 @@ namespace Microsoft.Samples.Kinect.BodyBasics
         /// </summary>
         private string statusText = null;
         
-        private k2Bridge.Hands hands = null;
+        public k2Bridge.Hands hands = null;
 
 
         /// <summary>
@@ -150,6 +150,7 @@ namespace Microsoft.Samples.Kinect.BodyBasics
 
             RPCServer rpcServer= new RPCServer(this);
             Thread oThread = new Thread(new ThreadStart(rpcServer.startHandsService));
+            //oThread.IsBackground = true; //not needed
             oThread.Start();
 
             // Spin for a while waiting for the started thread to become
@@ -598,6 +599,14 @@ namespace Microsoft.Samples.Kinect.BodyBasics
             {
                 hands.Right.TrackingState = k2Bridge.TrackingState.Inferred;
             }
+
+            hands.Left.X = leftHand.X;
+            hands.Left.Y = leftHand.Y;
+
+            hands.Right.X = rightHand.X;
+            hands.Right.Y = rightHand.Y;
+
+
         }
 
         public class RPCServer

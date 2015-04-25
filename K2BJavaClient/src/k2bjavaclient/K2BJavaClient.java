@@ -67,10 +67,16 @@ public class K2BJavaClient {
         try {
             while (true) {
                 Hands hand = client.getHands();
-                System.out.println(hand.left.x);
-                System.out.println(hand.left.y);
-                System.out.println(hand.left.trackingState);
-                Thread.sleep(10000);
+                System.out.println("leftX:"+hand.left.x);
+                System.out.println("leftY:"+hand.left.y);
+                System.out.println("state:"+hand.left.handState);
+                
+                System.out.println("rightX:"+hand.right.x);
+                System.out.println("rightY:"+hand.right.y);
+                System.out.println("state:"+hand.right.handState);
+                
+                
+                Thread.sleep(5000); //five second
             }
 
         } catch (TException ex) {
