@@ -559,6 +559,7 @@ namespace Microsoft.Samples.Kinect.BodyBasics
         }
         
         bool readerFlag = false;  // State flag
+        private const int RPC_PORT = 9090;
 
         private void setSendingHands(HandState handStateLeft, HandState handStateRight, Point leftHand, Point rightHand, TrackingState tsLeft, TrackingState tsRight)
         {
@@ -632,7 +633,7 @@ namespace Microsoft.Samples.Kinect.BodyBasics
                 {
                     ///HandServiceHandler handler = new HandServiceHandler(this.hands);
                     k2Bridge.HandService.Processor processor = new k2Bridge.HandService.Processor(this.hsh);
-                    TServerTransport serverTransport = new TServerSocket(9090);
+                    TServerTransport serverTransport = new TServerSocket(RPC_PORT);
                     TServer server = new TSimpleServer(processor, serverTransport);
 
                     // Use this for a multithreaded server
