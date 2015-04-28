@@ -31,7 +31,7 @@ can't mount on robot head because you need complete body/sitting posture for sen
 * Run BodyBasicWPF (with rpc server as well)
 * Use Jar file in your project.
 	1. include K2BLib.jar from K2BLib/dist/
-	2. include libthrift.jar (gan be build from apace thrift source)
+	2. include libthrift.jar (can be build from apache thrift source)
 	3. and 
 ```java
 k2bClient client = new k2bClient(); //client object;
@@ -45,5 +45,3 @@ Hands hands= client.getHands();
 $> thrift.exe --gen java hands.thrift
 
 $> thrift.exe --gen csharp hands.thrift
-
-

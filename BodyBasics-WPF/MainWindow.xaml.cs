@@ -359,10 +359,11 @@ namespace Microsoft.Samples.Kinect.BodyBasics
                     dc.DrawRectangle(Brushes.Black, null, new Rect(0.0, 0.0, this.displayWidth, this.displayHeight));
 
                     int penIndex = 0;
+                    
                     foreach (Body body in this.bodies)
                     {
                         Pen drawPen = this.bodyColors[penIndex++];
-
+                        
                         if (body.IsTracked)
                         {
                             this.DrawClippedEdges(body, dc);
@@ -391,9 +392,17 @@ namespace Microsoft.Samples.Kinect.BodyBasics
                             this.DrawHand(body.HandLeftState, jointPoints[JointType.HandLeft], dc);
                             this.DrawHand(body.HandRightState, jointPoints[JointType.HandRight], dc);
 
+
+                            //put the condition for first body only :O
                             setSendingHands(body.HandLeftState, body.HandRightState, jointPoints[JointType.HandLeft], jointPoints[JointType.HandRight], joints[JointType.HandLeft].TrackingState, joints[JointType.HandRight].TrackingState);
 
                         }
+                        else
+                        {   
+                            //set hand state when body isnot tracked!
+                            
+                        }
+                        
                     }
 
                     // prevent drawing outside of our render area
@@ -624,10 +633,10 @@ namespace Microsoft.Samples.Kinect.BodyBasics
                     ///HandServiceHandler handler = new HandServiceHandler(this.hands);
                     k2Bridge.HandService.Processor processor = new k2Bridge.HandService.Processor(this.hsh);
                     TServerTransport serverTransport = new TServerSocket(9090);
-                    //TServer server = new TSimpleServer(processor, serverTransport);
+                    TServer server = new TSimpleServer(processor, serverTransport);
 
                     // Use this for a multithreaded server
-                    TServer server = new TThreadPoolServer(processor, serverTransport);
+                    //TServer server = new TThreadPoolServer(processor, serverTransport);
 
                     Console.WriteLine("Starting the server...");
                     server.Serve();
