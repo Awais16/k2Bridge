@@ -6,13 +6,14 @@ BodyBasic WPF: Body Stream + RPC
 	thrift for RPC
 	HandsService [provinding hands location and state]
 
-### still have to look into
-
-CoordinateMapper of kinect: MapCameraPointToDepthSpace
+### still have to work on
 
 send all body joints;
 
 server side invocation for gestures (leave thrift move to grpc)
+
+check threading problems. so multiple clients crossconnect
+
 
 ### Limitation for kuka
 can't mount on robot head because you need complete body/sitting posture for sensor to recognize hands.
