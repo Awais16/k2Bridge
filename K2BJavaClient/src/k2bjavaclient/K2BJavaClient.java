@@ -37,13 +37,17 @@ public class K2BJavaClient {
 
         k2bClient client = new k2bClient();
          try {
-         client.connect("localhost", 9090);
+         client.connect("149.222.146.85", 9090);
             
          while(true){
          Hands hands= client.getHands();
-         System.out.println("leftX:"+hands.left.cameraSpaceX);
-         System.out.println("leftY:"+hands.left.cameraSpaceY);
-         System.out.println("state:"+hands.left.cameraSpaceZ);
+         
+         System.out.println("leftX:"+hands.left.x);
+         
+         System.out.println("csleftX:"+hands.left.cameraSpaceX);
+         System.out.println("csleftY:"+hands.left.cameraSpaceY);
+         System.out.println("csleftZ:"+hands.left.cameraSpaceZ);
+         
          /*       
          System.out.println("rightX:"+hands.right.x);
          System.out.println("rightY:"+hands.right.y);
