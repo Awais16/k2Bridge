@@ -17,6 +17,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import k2Bridge.HandState;
 import k2Bridge.Hands;
 import k2bConnect.k2bClient;
 import org.apache.thrift.TException;
@@ -40,22 +41,26 @@ public class K2BJavaClient {
             
          while(true){
          Hands hands= client.getHands();
-         System.out.println("leftX:"+hands.left.x);
-         System.out.println("leftY:"+hands.left.y);
-         System.out.println("state:"+hands.left.handState);
-                
+         System.out.println("leftX:"+hands.left.cameraSpaceX);
+         System.out.println("leftY:"+hands.left.cameraSpaceY);
+         System.out.println("state:"+hands.left.cameraSpaceZ);
+         /*       
          System.out.println("rightX:"+hands.right.x);
          System.out.println("rightY:"+hands.right.y);
          System.out.println("state:"+hands.right.handState);
-                
-         //sleep(1000); //5sec
+         */
+         
+              
+           sleep(1000); //5sec
          }
             
          } catch (TTransportException ex) {
          Logger.getLogger(K2BJavaClient.class.getName()).log(Level.SEVERE, null, ex);
          } catch (TException ex) {
          Logger.getLogger(K2BJavaClient.class.getName()).log(Level.SEVERE, null, ex);
-         }
+         } catch (InterruptedException ex) {
+            Logger.getLogger(K2BJavaClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
          
        /* SwingUtilities.invokeLater(new Runnable() {
             public void run() {
@@ -143,6 +148,6 @@ class MyPanel extends JPanel {
         
         //g.fillRect(Integer.parseInt(hands.left.x+""),Integer.parseInt(hands.left.y+""),squareW,squareH);
         //g.setColor(Color.BLACK);
-        // g.drawRect(squareX,squareY,squareW,squareH);
+        //g.drawRect(squareX,squareY,squareW,squareH);
     }
 }

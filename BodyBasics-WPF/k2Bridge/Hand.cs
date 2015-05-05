@@ -27,6 +27,9 @@ namespace k2Bridge
     private double _y;
     private HandState _handState;
     private TrackingState _trackingState;
+    private double _cameraSpaceX;
+    private double _cameraSpaceY;
+    private double _cameraSpaceZ;
 
     public double X
     {
@@ -88,6 +91,45 @@ namespace k2Bridge
       }
     }
 
+    public double CameraSpaceX
+    {
+      get
+      {
+        return _cameraSpaceX;
+      }
+      set
+      {
+        __isset.cameraSpaceX = true;
+        this._cameraSpaceX = value;
+      }
+    }
+
+    public double CameraSpaceY
+    {
+      get
+      {
+        return _cameraSpaceY;
+      }
+      set
+      {
+        __isset.cameraSpaceY = true;
+        this._cameraSpaceY = value;
+      }
+    }
+
+    public double CameraSpaceZ
+    {
+      get
+      {
+        return _cameraSpaceZ;
+      }
+      set
+      {
+        __isset.cameraSpaceZ = true;
+        this._cameraSpaceZ = value;
+      }
+    }
+
 
     public Isset __isset;
     #if !SILVERLIGHT
@@ -98,6 +140,9 @@ namespace k2Bridge
       public bool y;
       public bool handState;
       public bool trackingState;
+      public bool cameraSpaceX;
+      public bool cameraSpaceY;
+      public bool cameraSpaceZ;
     }
 
     public Hand() {
@@ -139,6 +184,27 @@ namespace k2Bridge
           case 4:
             if (field.Type == TType.I32) {
               TrackingState = (TrackingState)iprot.ReadI32();
+            } else { 
+              TProtocolUtil.Skip(iprot, field.Type);
+            }
+            break;
+          case 5:
+            if (field.Type == TType.Double) {
+              CameraSpaceX = iprot.ReadDouble();
+            } else { 
+              TProtocolUtil.Skip(iprot, field.Type);
+            }
+            break;
+          case 6:
+            if (field.Type == TType.Double) {
+              CameraSpaceY = iprot.ReadDouble();
+            } else { 
+              TProtocolUtil.Skip(iprot, field.Type);
+            }
+            break;
+          case 7:
+            if (field.Type == TType.Double) {
+              CameraSpaceZ = iprot.ReadDouble();
             } else { 
               TProtocolUtil.Skip(iprot, field.Type);
             }
@@ -188,6 +254,30 @@ namespace k2Bridge
         oprot.WriteI32((int)TrackingState);
         oprot.WriteFieldEnd();
       }
+      if (__isset.cameraSpaceX) {
+        field.Name = "cameraSpaceX";
+        field.Type = TType.Double;
+        field.ID = 5;
+        oprot.WriteFieldBegin(field);
+        oprot.WriteDouble(CameraSpaceX);
+        oprot.WriteFieldEnd();
+      }
+      if (__isset.cameraSpaceY) {
+        field.Name = "cameraSpaceY";
+        field.Type = TType.Double;
+        field.ID = 6;
+        oprot.WriteFieldBegin(field);
+        oprot.WriteDouble(CameraSpaceY);
+        oprot.WriteFieldEnd();
+      }
+      if (__isset.cameraSpaceZ) {
+        field.Name = "cameraSpaceZ";
+        field.Type = TType.Double;
+        field.ID = 7;
+        oprot.WriteFieldBegin(field);
+        oprot.WriteDouble(CameraSpaceZ);
+        oprot.WriteFieldEnd();
+      }
       oprot.WriteFieldStop();
       oprot.WriteStructEnd();
     }
@@ -218,6 +308,24 @@ namespace k2Bridge
         __first = false;
         __sb.Append("TrackingState: ");
         __sb.Append(TrackingState);
+      }
+      if (__isset.cameraSpaceX) {
+        if(!__first) { __sb.Append(", "); }
+        __first = false;
+        __sb.Append("CameraSpaceX: ");
+        __sb.Append(CameraSpaceX);
+      }
+      if (__isset.cameraSpaceY) {
+        if(!__first) { __sb.Append(", "); }
+        __first = false;
+        __sb.Append("CameraSpaceY: ");
+        __sb.Append(CameraSpaceY);
+      }
+      if (__isset.cameraSpaceZ) {
+        if(!__first) { __sb.Append(", "); }
+        __first = false;
+        __sb.Append("CameraSpaceZ: ");
+        __sb.Append(CameraSpaceZ);
       }
       __sb.Append(")");
       return __sb.ToString();

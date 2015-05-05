@@ -21,7 +21,10 @@ struct Hand{
 	1: double x,
 	2: double y,
 	3: HandState handState,
-	4:TrackingState trackingState
+	4: TrackingState trackingState
+	5: double cameraSpaceX,
+	6: double cameraSpaceY,
+	7: double cameraSpaceZ,
 }
 
 struct Hands {

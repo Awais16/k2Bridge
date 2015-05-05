@@ -383,10 +383,10 @@ namespace Microsoft.Samples.Kinect.BodyBasics
                                     position.Z = InferredZPositionClamp;
                                 }
 
-                                DepthSpacePoint depthSpacePoint = this.coordinateMapper.MapCameraPointToDepthSpace(position); //!important lookinto it so you know what you returning
+                                DepthSpacePoint depthSpacePoint = this.coordinateMapper.MapCameraPointToDepthSpace(position); 
                                 jointPoints[jointType] = new Point(depthSpacePoint.X, depthSpacePoint.Y);
                             }
-
+                            
                             this.DrawBody(joints, jointPoints, dc, drawPen);
 
                             this.DrawHand(body.HandLeftState, jointPoints[JointType.HandLeft], dc);
@@ -394,7 +394,7 @@ namespace Microsoft.Samples.Kinect.BodyBasics
 
 
                             //put the condition for first body only :O
-                            setSendingHands(body.HandLeftState, body.HandRightState, jointPoints[JointType.HandLeft], jointPoints[JointType.HandRight], joints[JointType.HandLeft].TrackingState, joints[JointType.HandRight].TrackingState);
+                            setSendingHands(body.HandLeftState, body.HandRightState, jointPoints[JointType.HandLeft], jointPoints[JointType.HandRight], joints[JointType.HandLeft].TrackingState, joints[JointType.HandRight].TrackingState, joints[JointType.HandLeft].Position, joints[JointType.HandRight].Position);
 
                         }
                         else
@@ -561,7 +561,7 @@ namespace Microsoft.Samples.Kinect.BodyBasics
         bool readerFlag = false;  // State flag
         private const int RPC_PORT = 9090;
 
-        private void setSendingHands(HandState handStateLeft, HandState handStateRight, Point leftHand, Point rightHand, TrackingState tsLeft, TrackingState tsRight)
+        private void setSendingHands(HandState handStateLeft, HandState handStateRight, Point leftHand, Point rightHand, TrackingState tsLeft, TrackingState tsRight, CameraSpacePoint csLeft, CameraSpacePoint csRight)
         {
             
             switch (handStateLeft)
@@ -612,10 +612,17 @@ namespace Microsoft.Samples.Kinect.BodyBasics
 
             hands.Left.X = leftHand.X;
             hands.Left.Y = leftHand.Y;
-
             hands.Right.X = rightHand.X;
             hands.Right.Y = rightHand.Y;
 
+            //cameraspace position
+            hands.Left.CameraSpaceX = csLeft.X;
+            hands.Left.CameraSpaceY = csLeft.Y;
+            hands.Left.CameraSpaceZ = csLeft.Z;
+
+            hands.Right.CameraSpaceX = csRight.X;
+            hands.Right.CameraSpaceY = csRight.Y;
+            hands.Right.CameraSpaceZ = csRight.Z;
 
         }
 
